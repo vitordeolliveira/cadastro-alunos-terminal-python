@@ -1,3 +1,5 @@
+#teste de commit nada mais kkkk
+#1 + 1 = 2
 import os
 def limpartela():
     os.system('cls' if os.name == 'nt' else 'clear')
