@@ -1,5 +1,3 @@
-#projeto cadastro de alunos pelo terminal
-
 import os
 def limpartela():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -51,7 +49,7 @@ while True:
                     break    
                 else:
                     print(f"O ALUNO/A {busca_aluno} NAO FOI ENCONTRADO/A")
-                              
+                    break         
         case 4:
             limpartela()
             remover_aluno = input("QUAL ALUNO DESEJA REMOVER: ").strip().upper()
