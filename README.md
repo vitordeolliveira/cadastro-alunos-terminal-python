@@ -22,6 +22,7 @@ Projeto desenvolvido com foco em prática de lógica de programação e fundamen
 
 - Python 3
 - Biblioteca padrão `os`
+- Biblioteca padrão `time`
 - Estruturas de dados (listas e dicionários)
 
 ---
