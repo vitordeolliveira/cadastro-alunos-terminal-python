@@ -1,72 +1,70 @@
-import os
-def limpartela():
-    os.system('cls' if os.name == 'nt' else 'clear')
+from visual import menu
+import time
+
+def adicionar_aluno():
+    nome = input("DIGITE O NOME DO ALUNO: ").strip().upper()
+    idade = int(input(f"QUAL É A IDADE DO/A {nome}: "))
+    nota = float(input(f"QUAL FOI A NOTA DO/A {nome}: "))
+    dicionario_escolar = {
+    "Nome Do Aluno":nome,
+    "Idade Do Aluno":idade,
+    "Nota Do Aluno":nota
+}
+    lista_alunos.append(dicionario_escolar)
 
 def media_turma():
-    limpartela()
+    menu.limpartela()
+    md = 0
     if len(lista_alunos) == 0:
-        print("NAO HÁ ALUNOS REGISTRADOS")
-        return None
+        return "NAO HÁ ALUNOS REGISTRADOS"
     soma = 0
     for aluno in lista_alunos:
         soma += aluno['Nota Do Aluno']
-    return soma / len(lista_alunos)
+    md = soma / len(lista_alunos)
+    return f"A MEDIA DA TURMA É {md:.2f}"
+
+def remover_aluno():
+    menu.limpartela()
+    remover = input("QUAL ALUNO DESEJA REMOVER: ").strip().upper()
+    for aluno in lista_alunos:
+        if aluno["Nome Do Aluno"] == remover:
+            lista_alunos.remove(aluno)
+            return f"Aluno:{remover} REMOVIDO COM SUCESSO"
+    else:
+        return f"Aluno:{remover} NAO EXISTE"
+
+def buscar():
+    menu.limpartela()
+    busca = input("QUAL ALUNO DESEJA PROCURAR: ").strip().upper()
+    for aluno in lista_alunos:
+        if aluno["Nome Do Aluno"] == busca:
+            return f"Aluno:{busca} ENCONTRADO/A"
+    else:
+        return f"Aluno:{busca} NAO FOI ENCONTRADO/A"
+        
 
 
-def adicionar_aluno(nome):
-    idade_ = int(input(f"QUAL É A IDADE DO/A {nome}: "))
-    nota_ = float(input(f"QUAL FOI A NOTA DO/A {nome}: "))
-    dicionario_escolar = {
-    "Nome Do Aluno":nome,
-    "Idade Do Aluno":idade_,
-    "Nota Do Aluno":nota_
-}
-    lista_alunos.append(dicionario_escolar)
-    
-
-print("--------------------------")
-print("===ESCOLA MUNICIPAL===")
-print("--------------------------")
 lista_alunos = []
 while True:
-    print("\n1 = ADICIONAR ALUNO\n2 = LISTAR TODOS OS ALUNOS\n3 = BUSCAR ALUNO PELO NOME\n4 = REMOVER ALUNO\n5 = MOSTRAR MEDIA GERAL DA TURMA\n6 = SAIR\n")
-    valor = int(input("OPCAO DESEJADA:"))
+    menu.limpartela()
+    valor = menu.tabela()
     match valor:
         case 1:
-           nome_ = input("DIGITE O NOME DO ALUNO: ").strip().upper()
-           adicionar_aluno(nome_)
+           adicionar_aluno()
         case 2:
-            limpartela()
+            menu.limpartela()
             for alunos in lista_alunos:
-                print(alunos)
+                print(alunos["Nome Do Aluno"])
+            time.sleep(2)
 
         case 3:
-            limpartela()
-            busca_aluno = input("QUAL ALUNO DESEJA PROCURAR: ").strip().upper()
-            for aluno in lista_alunos:
-                if aluno["Nome Do Aluno"] == busca_aluno:
-                    print(aluno)
-                    break    
-                else:
-                    print(f"O ALUNO/A {busca_aluno} NAO FOI ENCONTRADO/A")
-                    break         
+            print (buscar()) 
+            time.sleep(2)     
         case 4:
-            limpartela()
-            remover_aluno = input("QUAL ALUNO DESEJA REMOVER: ").strip().upper()
-            for aluno in lista_alunos:
-                if aluno["Nome Do Aluno"] == remover_aluno:
-                    lista_alunos.remove(aluno)
-                    print(f"Aluno {aluno} REMOVIDO COM SUCESSO")
-                    break
-            else:
-                print(f"O ALUNO/A {remover_aluno} NAO EXISTE")
+            print (remover_aluno())
+            time.sleep(2)
         case 5:
-                media = media_turma()
-                if media is None:
-                    continue
-                else:
-                    print(f"A MEDIA DA TURMA É {media:.2f}")
-        case 6:
-            break
+            print (media_turma())
+            time.sleep(2)
         case _:
             break
