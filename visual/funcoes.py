@@ -1,14 +1,48 @@
+from tabulate import tabulate
 lista_alunos = []
+id = 1
 def adicionar_aluno():
-    nome = input("DIGITE O NOME DO ALUNO: ").strip().upper()
-    idade = int(input(f"QUAL É A IDADE DO/A {nome}: "))
-    nota = float(input(f"QUAL FOI A NOTA DO/A {nome}: "))
-    dicionario_escolar = {
-    "Nome Do Aluno":nome,
-    "Idade Do Aluno":idade,
-    "Nota Do Aluno":nota
+    global id
+    nome = input("DIGITE O NOME E SOBRENOME DO ALUNO: ").strip().upper()
+    ano_nsc = int(input(f"QUAL É A DATA DE NASCIMENTO DO(A) {nome}: "))
+    nota = float(input(f"QUAL FOI A NOTA DO(A) {nome}: "))
+    tabela = {
+    "ID" : id,   
+    "Nome Do Aluno" : nome,
+    "Ano De Nascimento Do Aluno(A)" : ano_nsc,
+    "Nota Do Aluno(A)" : nota
 }
-    lista_alunos.append(dicionario_escolar)
+    lista_alunos.append(tabela)
+    id += 1
+    print("Aluno adicionado com sucesso!\n")
+
+def listar_alunos():
+    if not lista_alunos:
+        print("\nNenhum aluno cadastrado ainda!")
+        return
+
+    # Cabeçalho da tabela
+    print("\n" + "="*85)
+    print(f"{'ID':<5} | {'NOME DO ALUNO':<30} | {'ANO NASC.':<10} | {'NOTA':<6}")
+    print("="*85)
+    
+    # Linhas da tabela usando .get() para evitar KeyError
+    for aluno in lista_alunos:
+        # Buscamos os valores. Se a chave exata não existir, retorna um texto padrão
+        id_aluno = aluno.get("ID", "-")
+        nome = aluno.get("Nome Do Aluno", "Não Informado")
+        ano = aluno.get("Ano De Nascimento Do Aluno(A)", 0)
+        nota = aluno.get("Nota Do Aluno(A)", 0.0)
+        
+        print(f"{id_aluno:<5} | "
+              f"{nome:<30} | "
+              f"{ano:<10} | "
+              f"{nota:<6.1f}")
+    
+    print("="*85 + "\n")
+
+    
+
 
 def media_turma():
     md = 0
