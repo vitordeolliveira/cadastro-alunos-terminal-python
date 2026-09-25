@@ -5,14 +5,27 @@ id = 1
 
 def adicionar_aluno():
     global id
+    status = ""
     nome = input("DIGITE O NOME/SOBRENOME DO ALUNO: ").strip().upper()
     ano_nsc = int(input(f"QUAL É O ANO DE NASCIMENTO DO ALUNO(A) {nome}: "))
     nota = float(input(f"QUAL FOI A NOTA DO(A) {nome}: "))
+    if (nota > 10 or nota < 0):
+        print("DIGITE UMA NOTA VALÍDA ENTRE 0-10: ")
+        return
+    else:
+        if (nota <= 5):
+            status = "REPROVADO(A)"
+        elif (nota >5 and nota <=7):
+            status = "RECUPERAÇÃO"
+        else:
+            status = "APROVADO(A)"
+
     tabela = {
     "ID" : id,   
     "Nome Do Aluno" : nome,
     "Ano De Nascimento Do Aluno" : ano_nsc,
-    "Nota Do Aluno" : nota
+    "Nota Do Aluno" : nota,
+    "Status" : status
 }
     lista_alunos.append(tabela)
     id += 1
@@ -22,17 +35,20 @@ def adicionar_aluno():
 
 def listar_alunos():
     print("\n" + "="*85)
-    print(f"{'ID':<5} | {'NOME DO ALUNO':<30} | {'ANO NASC.':<10} | {'NOTA':<6}")
+    print(f"{'ID':<5} | {'NOME DO ALUNO':<30} | {'ANO NASC.':<10} | {'NOTA':<6} | {'STATUS':<8}")
     print("="*85)
     for aluno in lista_alunos:
         id_aluno = aluno.get("ID", "-")
         nome = aluno.get("Nome Do Aluno", "Não Informado")
         ano = aluno.get("Ano De Nascimento Do Aluno", 0)
         nota = aluno.get("Nota Do Aluno", 0.0)
+        status = aluno.get("Status" , "-")
+
         print(f"{id_aluno:<5} | "
             f"{nome:<30} | "
             f"{ano:<10} | "
-            ,f"{nota:<6.1f}")
+            f"{nota:<6.1f} |"
+            f"{status:<8}")
         
     print("="*85 + "\n")
 
@@ -59,7 +75,7 @@ def excluir_aluno():
     else:
         return f"ID NÃO ENCONTRADO"
 
-def buscar():
+def buscar_att():
     busca = input("QUAL ALUNO DESEJA PROCURAR: ").strip().upper()
     for aluno in lista_alunos:
         if aluno["Nome Do Aluno"] == busca:
@@ -68,12 +84,44 @@ def buscar():
             ano = aluno.get("Ano De Nascimento Do Aluno", 0)
             nota = aluno.get("Nota Do Aluno", 0.0)
             print(f"{'ID':<5} | {'NOME DO ALUNO':<30} | {'ANO NASC.':<10} | {'NOTA':<6}")
-            return(f"{id_aluno:<5} | "
+            print(f"{id_aluno:<5} | "
                 f"{nome:<30} | "
                 f"{ano:<10} | "
                 f"{nota:<6.1f}")
+            atualizar = input("DESEJA ATUALIZAR OS DADOS DO ALUNO(A) S/N").strip().upper()
+            if atualizar == "S":
+                print ("""
+                        [1] ATUALIZAR NOME/SOBRENOME
+                        [2] ATUALIZAR ANO DE NASCIMENTO
+                        [3] ATUALIAR NOTA DO ALUNO(A)
+                        [5] SAIR""")
+                valor = int(input())
+                match valor:
+                    case 1:
+                        nome = input("DIGITE O NOME/SOBRENOME DO ALUNO(A): ").strip().upper()
+                        aluno["Nome Do Aluno"] = nome
+                    case 2:
+                        data_ncs = int(input(f"DIGITE O ANO DE NASCIMENTO DO(A) {nome}: "))
+                        aluno["Ano De Nascimento Do Aluno"] = data_ncs
+                    case 3:
+                        nota = float(input(f"QUAL FOI A NOTA DO(A) {nome}: "))
+                        if (nota > 10 or nota < 0):
+                            print("DIGITE UMA NOTA VALÍDA ENTRE 0-10: ")
+                            return
+                        else:
+                            aluno["Nota Do Aluno"] = nota
+                            if (nota <= 5):
+                                aluno["Status"] = "REPROVADO(A)"
+                            elif (nota >5 and nota <=7):
+                                aluno["Status"] = "RECUPERAÇÃO"
+                            else:
+                                aluno["Status"] = "APROVADO(A)"
+                    case _:
+                        return
+
+            else:
+                return
+
+        
     else:
         return f"ALUNO NÃO CADASTRADO"
-
-def atualizar_aluno():
-    pass
