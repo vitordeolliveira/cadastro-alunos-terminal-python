@@ -10,20 +10,7 @@ while True:
            adicionar_aluno()
         case 2:
             limpartela()
-            print("\n" + "="*85)
-            print(f"{'ID':<5} | {'NOME DO ALUNO':<30} | {'ANO NASC.':<10} | {'NOTA':<6}")
-            print("="*85)
-            for aluno in lista_alunos:
-                id_aluno = aluno.get("ID", "-")
-                nome = aluno.get("Nome Do Aluno", "Não Informado")
-                ano = aluno.get("Ano De Nascimento Do Aluno(A)", 0)
-                nota = aluno.get("Nota Do Aluno(A)", 0.0)
-            print(f"{id_aluno:<5} | "
-                f"{nome:<30} | "
-                f"{ano:<10} | "
-                f"{nota:<6.1f}")
-    
-            print("="*85 + "\n")
+            listar_alunos()
             time.sleep(5)
 
 
