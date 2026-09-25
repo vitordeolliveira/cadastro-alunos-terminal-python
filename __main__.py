@@ -12,19 +12,17 @@ while True:
             limpartela()
             listar_alunos()
             time.sleep(5)
-
-
         case 3:
             limpartela()
             print (buscar()) 
-            time.sleep(2)     
+            time.sleep(5)     
         case 4:
             limpartela()
-            print (remover_aluno())
-            time.sleep(2)
+            print (excluir_aluno())
+            time.sleep(5)
         case 5:
             limpartela()
             print (media_turma())
-            time.sleep(2)
+            time.sleep(5)
         case _:
             break
