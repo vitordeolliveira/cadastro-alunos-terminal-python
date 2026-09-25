@@ -3,10 +3,11 @@ def limpartela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def tabela():
-    print('-' * 30) 
+    print('=' * 30) 
     print("ESCOLA MUNICIPAL".center(30))
-    print('-' * 30) 
+    print('=' * 30) 
     print("\n[1] = ADICIONAR ALUNO\n[2] = LISTAR TODOS OS ALUNOS\n[3] = BUSCAR ALUNO PELO NOME\n[4] = REMOVER ALUNO\n[5] = MOSTRAR MEDIA GERAL DA TURMA\n[6] = SAIR\n")
+    print("=" * 30)
     try:
         x = int(input('Escolha: '))
     except Exception as erro:
