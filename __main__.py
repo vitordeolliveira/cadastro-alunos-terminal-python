@@ -14,7 +14,7 @@ while True:
             time.sleep(5)
         case 3:
             limpartela()
-            buscar_att() 
+            buscar() 
             time.sleep(5)     
         case 4:
             limpartela()
