@@ -1,37 +1,46 @@
-# Sistema de Cadastro de Alunos (Terminal)
+# Cadastro de Alunos
 
-Aplicação em Python para gerenciamento básico de alunos via terminal.  
-Permite cadastrar alunos, listar registros, buscar por nome, remover alunos e calcular a média geral da turma.
+Projeto simples de cadastro de alunos desenvolvido em Python para praticar lógica de programação, funções, estruturas de dados e operações CRUD pelo terminal.
 
-Projeto desenvolvido com foco em prática de lógica de programação e fundamentos de backend.
+## Funcionalidades
 
----
+* Cadastrar aluno
+* Listar alunos
+* Buscar aluno
+* Atualizar dados
+* Excluir aluno
+* Calcular média da turma
+* Classificar alunos por situação
 
-## 📌 Funcionalidades
+## Tecnologias
 
-- Cadastro de alunos (nome, idade e nota)
-- Listagem de alunos cadastrados
-- Busca de aluno pelo nome
-- Remoção de aluno
-- Cálculo da média geral da turma
-- Execução via terminal (CLI)
+* Python
+* Git
+* GitHub
 
----
+## Como executar
 
-## 🛠️ Tecnologias Utilizadas
+Clone o repositório:
 
-- Python 3
-- Biblioteca padrão `os`
-- Biblioteca padrão `time`
-- Estruturas de dados (listas e dicionários)
+```bash
+git clone https://github.com/vitordeolliveira/cadastro-alunos-terminal-python.git
+```
 
----
+Entre na pasta:
 
-## ▶️ Execução
+```bash
+cd cadastro-alunos-terminal-python
+```
 
-O projeto é executado diretamente pelo terminal utilizando Python 3.
+Execute:
 
 ```bash
 python main.py
+```
 
+## Próximos passos
 
+* Melhorar as validações
+* Persistir os dados utilizando MySQL
+* Transformar o sistema em uma API REST com FastAPI
+* Adicionar testes

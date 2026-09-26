@@ -15,7 +15,7 @@ def adicionar_aluno():
     else:
         if (nota <= 5):
             status = "REPROVADO(A)"
-        elif (nota >5 and nota <=7):
+        elif (nota <=7):
             status = "RECUPERAÇÃO"
         else:
             status = "APROVADO(A)"
@@ -53,7 +53,6 @@ def listar_alunos():
     print("="*85 + "\n")
 
 def media_turma():
-    md = 0
     if len(lista_alunos) == 0:
         return "NAO HÁ ALUNOS REGISTRADOS"
     soma = 0
@@ -94,7 +93,7 @@ def buscar_att():
                         [1] ATUALIZAR NOME/SOBRENOME
                         [2] ATUALIZAR ANO DE NASCIMENTO
                         [3] ATUALIAR NOTA DO ALUNO(A)
-                        [5] SAIR""")
+                        [4] SAIR""")
                 valor = int(input())
                 match valor:
                     case 1:
@@ -118,10 +117,5 @@ def buscar_att():
                                 aluno["Status"] = "APROVADO(A)"
                     case _:
                         return
-
-            else:
-                return
-
-        
     else:
         return f"ALUNO NÃO CADASTRADO"
