@@ -111,7 +111,7 @@ def buscar_att():
                             aluno["Nota Do Aluno"] = nota
                             if (nota <= 5):
                                 aluno["Status"] = "REPROVADO(A)"
-                            elif (nota >5 and nota <=7):
+                            elif (nota <=7):
                                 aluno["Status"] = "RECUPERAÇÃO"
                             else:
                                 aluno["Status"] = "APROVADO(A)"
