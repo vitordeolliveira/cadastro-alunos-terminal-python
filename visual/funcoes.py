@@ -6,32 +6,57 @@ id = 1
 def adicionar_aluno():
     global id
     status = ""
-    nome = input("DIGITE O NOME/SOBRENOME: ").strip().upper()
-    ano_nsc = int(input(f"QUAL É O ANO DE NASCIMENTO DO(A) {nome}: "))
-    nota = float(input(f"QUAL FOI A NOTA DO(A) {nome}: "))
-    if (nota > 10 or nota < 0):
-        print("DIGITE UMA NOTA VALÍDA ENTRE 0-10: ")
-        return
-    else:
+    while True:
+        nome = input("DIGITE O NOME/SOBRENOME: ").strip().upper()
+        if (nome == "") or (not(nome.replace(" ","").isalpha())):
+            print("O NOME DIGITADO NÃO É VALIDO, POR FAVOR DIGITE SOMENTE LETRAS")
+            time.sleep(5)
+            limpartela()
+            continue
+        try:
+            ano_nsc = int(input(f"QUAL É O ANO DE NASCIMENTO DO(A) {nome}: "))
+            if not (2000 <= ano_nsc <= 2020):
+                limpartela()
+                print("ANO FORA DO INTERVALO PERMITIDO!")
+                time.sleep(5)
+                continue
+            nota = float(input(f"QUAL FOI A NOTA DO(A) {nome}: "))
+            if (nota > 10 or nota < 0):
+                limpartela()
+                print("DIGITE UMA NOTA VALÍDA ENTRE 0/10: ")
+                time.sleep(5)
+                continue
+        except ValueError:
+            limpartela()
+            print("ERRO DE DIGITAÇÃO POR FAVOR DIGITE APENAS NÚMEROS INTEIROS VALÍDOS! ")
+            time.sleep(5)
+            continue
         if (nota <= 5):
             status = "REPROVADO(A)"
         elif (nota <=7):
             status = "RECUPERAÇÃO"
         else:
             status = "APROVADO(A)"
-
-    tabela = {
-    "ID" : id,   
-    "Nome" : nome,
-    "ano_nascimento" : ano_nsc,
-    "nota" : nota,
-    "Status" : status
-}
-    lista_alunos.append(tabela)
-    id += 1
+        tabela = {
+            "ID" : id,   
+            "Nome" : nome,
+            "ano_nascimento" : ano_nsc,
+            "nota" : nota,
+            "Status" : status
+        }
+        lista_alunos.append(tabela)
+        id += 1
+        limpartela()
+        cont = input ("DESEJA ADICIONAR OUTRO ALUNO?: [S/N]").strip().upper()
+        if (cont == "S") or (cont == "SIM"):
+            limpartela()
+            continue
+        else:
+            break
+ 
     limpartela()
-    print("ALUNO ADICIONADO COM SUCESSO!\n")
-    time.sleep(2)
+    print("ALUNO's(A) ADICIONADO COM SUCESSO!\n")
+    time.sleep(5)
 
 def listar_alunos():
     print("\n" + "="*85)
@@ -62,7 +87,13 @@ def media_turma():
     return f"A MEDIA DA TURMA É {md:.2f}"
 
 def excluir_aluno():
-    delete = int(input("Qual É O ID Do Aluno(A): "))
+    try:
+        delete = int(input("Qual É O ID Do Aluno(A): "))
+    except ValueError:
+        limpartela()
+        print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO!")
+        time.sleep(5)
+        return
     for aluno in lista_alunos:
         if aluno["ID"] == delete:
             resp = input(f"Deseja Realmente Excluir O Aluno(A) {aluno["Nome"]} [S/N]").strip().upper()
@@ -76,6 +107,11 @@ def excluir_aluno():
 
 def buscar():
     busca = input("QUAL ALUNO DESEJA PROCURAR: ").strip().upper()
+    if (busca == "") or (not(busca.replace(" ","").isalpha())):
+        print("O NOME DIGITADO NÃO É VALIDO, POR FAVOR DIGITE SOMENTE LETRAS")
+        time.sleep(5)
+        limpartela()
+        return
     for aluno in lista_alunos:
         if aluno["Nome"] == busca:
             id_aluno = aluno.get("ID", "-")
@@ -103,20 +139,51 @@ def atualizar_aluno(aluno:dict):
                 [2] ATUALIZAR ANO DE NASCIMENTO
                 [3] ATUALIAR NOTA DO ALUNO(A)
                 [4] SAIR""")
-        valor = int(input())
+        while True:
+            try:
+                valor = int(input())
+                if (valor <= 0) or (valor > 4):
+                    limpartela()
+                    print("O NÚMERO DIGITADO NÃO ESTÁ ENTRE [1/4]")
+                    continue
+                else:
+                    break
+            except ValueError:
+                limpartela()
+                print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO! ")
+                time.sleep(5)
+                continue
         match valor:
             case 1:
                 nome = input("DIGITE O NOME/SOBRENOME(A): ").strip().upper()
-                aluno["Nome"] = nome
-                print("ALTERAÇÕES FEITAS COM SUCESSO!")
-                time.sleep(2)
+                if (nome == "") or (not(nome.replace(" ","").isalpha())):
+                    print("O NOME DIGITADO NÃO É VALIDO, POR FAVOR DIGITE SOMENTE LETRAS")
+                    time.sleep(5)
+                    limpartela()
+                    return
+                else:
+                    aluno["Nome"] = nome
+                    print("ALTERAÇÕES FEITAS COM SUCESSO!")
+                    time.sleep(5)
             case 2:
-                data_ncs = int(input(f"DIGITE O ANO DE NASCIMENTO DO(A) {aluno["Nome"]}: "))
-                aluno["ano_nascimento"] = data_ncs
-                print("ALTERAÇÕES FEITAS COM SUCESSO!")
-                time.sleep(2)
+                try:
+                    data_ncs = int(input(f"DIGITE O ANO DE NASCIMENTO DO(A) {aluno["Nome"]}: "))
+                except ValueError:
+                    print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO VALÍDO!")
+                    time.sleep(2)
+                    return
+                if not (2000 <= data_ncs <= 2020):
+                    print("ANO FORA DO INTERVALO PERMITIDO! ")
+                    return
+                else:
+                    aluno["ano_nascimento"] = data_ncs
+                    print("ALTERAÇÕES FEITAS COM SUCESSO!")
+                    time.sleep(5)
             case 3:
-                nota = float(input(f"QUAL FOI A NOTA DO(A) {aluno["Nome"]}: "))
+                try:
+                    nota = float(input(f"QUAL FOI A NOTA DO(A) {aluno["Nome"]}: "))
+                except ValueError:
+                    print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO! ")
                 if (nota > 10 or nota < 0):
                     print("DIGITE UMA NOTA VALÍDA ENTRE 0-10: ")
                     return
@@ -130,6 +197,6 @@ def atualizar_aluno(aluno:dict):
                         aluno["Status"] = "APROVADO(A)"
                 print("ALTERAÇÕES FEITAS COM SUCESSO!")
                 time.sleep(2)
-            case _:
+            case 4:
                 return
     

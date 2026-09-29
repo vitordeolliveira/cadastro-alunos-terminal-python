@@ -6,15 +6,16 @@ def tabela():
     print('=' * 50) 
     print("ESCOLA MUNICIPAL".center(30))
     print('=' * 50) 
-    print("\n[1] = ADICIONAR ALUNO\n[2] = LISTAR TODOS OS ALUNOS\n[3] = BUSCAR ALUNO PELO NOME\n[4] = REMOVER ALUNO\n[5] = MOSTRAR MEDIA GERAL DA TURMA\n[6] = SAIR\n")
+    print("\n[1] = ADICIONAR ALUNO's(A)\n[2] = LISTAR TODOS OS ALUNOS\n[3] = BUSCAR ALUNO PELO NOME\n[4] = REMOVER ALUNO PELO ID\n[5] = MOSTRAR MEDIA GERAL DA TURMA\n[6] = SAIR\n")
     print("=" * 50)
-    try:
-        x = int(input('Escolha: '))
-    except Exception as erro:
-        print(f'ERRO!!! {erro.__class__}')
-        print('Por Favor Digite Um Numero Inteiro Valído: ')
-        x = int(input('Tente Novamente: '))
+    while True:
+        try:
+            x = int(input('ESCOLHA: '))
+        except ValueError:
+            print(f'ERRO!!!')
+            print('POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO: ')
+            continue
+        break
     return x
-
 
                 
