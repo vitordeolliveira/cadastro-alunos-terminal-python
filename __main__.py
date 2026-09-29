@@ -14,7 +14,7 @@ while True:
             time.sleep(5)
         case 3:
             limpartela()
-            buscar() 
+            print(buscar())
             time.sleep(5)     
         case 4:
             limpartela()
@@ -24,5 +24,5 @@ while True:
             limpartela()
             print (media_turma())
             time.sleep(5)
-        case _:
+        case 6:
             break
