@@ -119,11 +119,9 @@ def buscar():
                 f"{nota:<6.1f}")
             atualizar = input("DESEJA ATUALIZAR OS DADOS DO ALUNO(A) S/N: ").strip().upper()
             if (atualizar == "S" or atualizar == "SIM"):
-                atualizar_aluno(aluno)
-                return
+                return(atualizar_aluno(aluno))   
             else:
-                return("OPERAÇÃO CANCELADA")
-                
+                return("OPERAÇÃO CANCELADA")            
     else:
         return ("ALUNO NÃO CADASTRADO")
 
@@ -140,15 +138,14 @@ def atualizar_aluno(aluno:dict):
                     continue
                 else:
                     aluno["Nome"] = nome
-                    limpartela()
                     print("ALTERAÇÕES FEITAS COM SUCESSO!")
                     cont = input ("DESEJA ALTERAR OURTO DADO DO(A) ALUNO?: [S/N]").strip().upper()
                     if (cont == "S") or (cont == "SIM"):
                         limpartela()
                         continue
                     else:
-                        print("OPERAÇÃO CANCELADA!")
-                        break
+                        return("OPERAÇÃO CANCELADA!")
+                        
             case 2:
                 try:
                     data_ncs = int(input(f"DIGITE O ANO DE NASCIMENTO DO(A) {aluno['Nome']}: "))
@@ -158,7 +155,7 @@ def atualizar_aluno(aluno:dict):
                         continue
                 except ValueError:
                     print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO VALÍDO!")
-                    time.sleep(2)
+                    time.sleep(5)
                     continue
                 else:
                     aluno['ano_nascimento'] = data_ncs
@@ -168,17 +165,18 @@ def atualizar_aluno(aluno:dict):
                         limpartela()
                         continue
                     else:
-                        print("OPERAÇÃO CANCELADA!")
-                        break
+                        return("OPERAÇÃO CANCELADA!")
+                        
             case 3:
                 try:
-                    nota = float(input(f"QUAL FOI A NOTA DO(A) {aluno["Nome"]}: "))
+                    nota = float(input(f"QUAL FOI A NOTA DO(A) {aluno['Nome']}: "))
                 except ValueError:
                     print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO VALÍDO ENTRE 0/10! ")
                     time.sleep(5)
                     continue
                 if (nota > 10 or nota < 0):
                     print("DIGITE UMA NOTA VALÍDA ENTRE 0/10: ")
+                    time.sleep(5)
                     continue
                 else:
                     aluno["nota"] = nota
@@ -189,14 +187,12 @@ def atualizar_aluno(aluno:dict):
                     else:
                         aluno["Status"] = "APROVADO(A)"
                 print("ALTERAÇÕES FEITAS COM SUCESSO!")
-                limpartela()
                 cont = input ("DESEJA ALTERAR OUTRO DADO DO(A) ALUNO?: [S/N]").strip().upper()
                 if (cont == "S") or (cont == "SIM"):
                     limpartela()
                     continue
                 else:
-                    print("OPERAÇÃO CANCELADA!")
-                    break
+                    return("OPERAÇÃO CANCELADA!")
             case 4:
-                return
+                return("OPERAÇÃO CANCELADA!")
     
