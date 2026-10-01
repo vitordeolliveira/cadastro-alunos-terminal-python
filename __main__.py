@@ -22,7 +22,7 @@ while True:
             time.sleep(5)
         case 5:
             limpartela()
-            print (media_turma())
+            print (relatorio())
             time.sleep(5)
         case 6:
             break

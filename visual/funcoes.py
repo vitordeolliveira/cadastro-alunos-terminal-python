@@ -77,14 +77,38 @@ def listar_alunos():
         
     print("="*85 + "\n")
 
-def media_turma():
-    if len(lista_alunos) == 0:
-        return "NAO HÁ ALUNOS REGISTRADOS"
-    soma = 0
-    for aluno in lista_alunos:
-        soma += aluno['nota']
-    md = soma / len(lista_alunos)
-    return f"A MEDIA DA TURMA É {md:.2f}"
+def relatorio():
+    while True:
+        valor = tabela_relatorio()
+        match valor:
+            case 1:
+                if len(lista_alunos) == 0:
+                    return "NAO HÁ ALUNOS REGISTRADOS"
+                else:
+                    soma = 0
+                    for aluno in lista_alunos:
+                        soma += aluno['nota']
+                    md = soma / len(lista_alunos)
+                    return f"A MEDIA DA TURMA É {md:.2f}"
+            case 2:
+                maior_nt = 0
+                for aluno in lista_alunos:
+                    nt_atual = aluno['nota']
+                    if maior_nt < nt_atual:
+                        maior_nt = nt_atual
+                        nome = aluno['Nome']
+                return f"A MAIOR NOTA DA TURMA É DO ALUNO {nome}, COM NOTA = {maior_nt:.2F} "
+            case 3:
+                menor_nt = lista_alunos[0]['nota']
+                nome = lista_alunos[0]['Nome']
+                for aluno in lista_alunos:
+                    nt_atual = aluno['nota']
+                    if menor_nt > nt_atual:
+                        menor_nt = nt_atual
+                        nome = aluno['Nome']
+                return f"A MENOR NOTA DA TURMA É DO ALUNO {nome}, COM NOTA = {menor_nt:.2F} "
+            case 4:
+                return "OPERAÇÃO CANCELADA"
 
 def excluir_aluno():
     try:
