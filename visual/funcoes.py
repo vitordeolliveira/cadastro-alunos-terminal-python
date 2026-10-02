@@ -91,24 +91,32 @@ def relatorio():
                     md = soma / len(lista_alunos)
                     return f"A MEDIA DA TURMA É {md:.2f}"
             case 2:
-                maior_nt = 0
-                for aluno in lista_alunos:
-                    nt_atual = aluno['nota']
-                    if maior_nt < nt_atual:
-                        maior_nt = nt_atual
-                        nome = aluno['Nome']
-                return f"A MAIOR NOTA DA TURMA É DO ALUNO {nome}, COM NOTA = {maior_nt:.2F} "
+                if len(lista_alunos) == 0:
+                    return "NAO HÁ ALUNOS REGISTRADOS"
+                else:
+                    maior_nt = lista_alunos[0]['nota']
+                    nome = lista_alunos[0]['Nome']
+                    for aluno in lista_alunos:
+                        nt_atual = aluno['nota']
+                        if maior_nt < nt_atual:
+                            maior_nt = nt_atual
+                            nome = aluno['Nome']
+                    return f"A MAIOR NOTA DA TURMA É DO ALUNO(A) {nome} COM NOTA = {maior_nt:.2F} "
             case 3:
-                menor_nt = lista_alunos[0]['nota']
-                nome = lista_alunos[0]['Nome']
-                for aluno in lista_alunos:
-                    nt_atual = aluno['nota']
-                    if menor_nt > nt_atual:
-                        menor_nt = nt_atual
-                        nome = aluno['Nome']
-                return f"A MENOR NOTA DA TURMA É DO ALUNO {nome}, COM NOTA = {menor_nt:.2F} "
+                if len(lista_alunos) == 0:
+                    return "NAO HÁ ALUNOS REGISTRADOS"
+                else:
+                    menor_nt = lista_alunos[0]['nota']
+                    nome = lista_alunos[0]['Nome']
+                    for aluno in lista_alunos:
+                        nt_atual = aluno['nota']
+                        if menor_nt > nt_atual:
+                            menor_nt = nt_atual
+                            nome = aluno['Nome']
+                    return f"A MENOR NOTA DA TURMA É DO ALUNO(A) {nome} COM NOTA = {menor_nt:.2F} "
             case 4:
                 return "OPERAÇÃO CANCELADA"
+            
 
 def excluir_aluno():
     try:
