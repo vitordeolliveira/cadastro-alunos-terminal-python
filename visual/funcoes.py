@@ -7,28 +7,28 @@ def adicionar_aluno():
     global id
     status = ""
     while True:
-        nome = input("DIGITE O NOME/SOBRENOME: ").strip().upper()
+        nome = input("Digite nome/sobrenome: ").strip().upper()
         if (nome == "") or (not(nome.replace(" ","").isalpha())):
-            print("O NOME DIGITADO NÃO É VALIDO, POR FAVOR DIGITE SOMENTE LETRAS")
+            print("O nome digitado não é válido, por favor digite apenas letras!")
             time.sleep(5)
             limpartela()
             continue
         try:
-            ano_nsc = int(input(f"QUAL É O ANO DE NASCIMENTO DO(A) {nome}: "))
+            ano_nsc = int(input(f"Qual é o ano de nascimento do aluno(a) {nome}: "))
             if not (2000 <= ano_nsc <= 2020):
                 limpartela()
-                print("ANO FORA DO INTERVALO PERMITIDO!")
+                print("Ano fora do intervalo permitido!")
                 time.sleep(5)
                 continue
-            nota = float(input(f"QUAL FOI A NOTA DO(A) {nome}: "))
+            nota = float(input(f"Qual foi a nota do(a) aluno(a) {nome}: "))
             if (nota > 10 or nota < 0):
                 limpartela()
-                print("DIGITE UMA NOTA VALÍDA ENTRE 0/10: ")
+                print("A nota digitada não está entre [0 e 10]: ")
                 time.sleep(5)
                 continue
         except ValueError:
             limpartela()
-            print("ERRO DE DIGITAÇÃO POR FAVOR DIGITE APENAS NÚMEROS INTEIROS VALÍDOS! ")
+            print("Erro de digitação, por favor digite apenas números válidos! ")
             time.sleep(5)
             continue
         if (nota <= 5):
@@ -47,7 +47,7 @@ def adicionar_aluno():
         lista_alunos.append(tabela)
         id += 1
         limpartela()
-        cont = input ("DESEJA ADICIONAR OUTRO ALUNO?: [S/N]").strip().upper()
+        cont = input ("Deseja adicionar outro aluno(a)?: [S/N]").strip().upper()
         if (cont == "S") or (cont == "SIM"):
             limpartela()
             continue
@@ -55,7 +55,7 @@ def adicionar_aluno():
             break
  
     limpartela()
-    print("ALUNO's(A) ADICIONADO COM SUCESSO!\n")
+    print("Alunos(as) adicionados com sucesso!\n")
     time.sleep(5)
 
 def listar_alunos():
@@ -83,16 +83,16 @@ def relatorio():
         match valor:
             case 1:
                 if len(lista_alunos) == 0:
-                    return "NAO HÁ ALUNOS REGISTRADOS"
+                    return "Não há alunos(as) cadastrados!"
                 else:
                     soma = 0
                     for aluno in lista_alunos:
                         soma += aluno['nota']
                     md = soma / len(lista_alunos)
-                    return f"A MEDIA DA TURMA É {md:.2f}"
+                    return f"A média da turma é {md:.2f}"
             case 2:
                 if len(lista_alunos) == 0:
-                    return "NAO HÁ ALUNOS REGISTRADOS"
+                    return "Não há alunos(as) cadastrados!"
                 else:
                     maior_nt = lista_alunos[0]['nota']
                     nome = lista_alunos[0]['Nome']
@@ -101,10 +101,10 @@ def relatorio():
                         if maior_nt < nt_atual:
                             maior_nt = nt_atual
                             nome = aluno['Nome']
-                    return f"A MAIOR NOTA DA TURMA É DO ALUNO(A) {nome} COM NOTA = {maior_nt:.2F} "
+                    return f"A maior nota é do(a) aluno(a) {nome} com nota {maior_nt:.2f} "
             case 3:
                 if len(lista_alunos) == 0:
-                    return "NAO HÁ ALUNOS REGISTRADOS"
+                    return "Não há alunos(as) cadastrados"
                 else:
                     menor_nt = lista_alunos[0]['nota']
                     nome = lista_alunos[0]['Nome']
@@ -113,31 +113,31 @@ def relatorio():
                         if menor_nt > nt_atual:
                             menor_nt = nt_atual
                             nome = aluno['Nome']
-                    return f"A MENOR NOTA DA TURMA É DO ALUNO(A) {nome} COM NOTA = {menor_nt:.2F} "
+                    return f"A menor nota é do aluno(a) {nome} com nota {menor_nt:.2f} "
             case 4:
-                return "OPERAÇÃO CANCELADA"
+                return "Operação cancelada!"
             
 
 def excluir_aluno():
     try:
-        delete = int(input("QUAL É O ID DO ALINO(A): "))
+        delete = int(input("Qual é o ID do aluno(a): "))
     except ValueError:
         limpartela()
-        return("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO!")
+        return("Erro de digitação, por favor digite um número inteiro válido!")
     for aluno in lista_alunos:
         if aluno['ID'] == delete:
-            resp = input(f"Deseja Realmente Excluir O Aluno(A) {aluno['Nome']} [S/N]").strip().upper()
+            resp = input(f"Deseja realmente excluir o aluno(A) {aluno['Nome']} [S/N]").strip().upper()
             if resp == "S" or resp == "SIM":
                 lista_alunos.remove(aluno)
-                return f"ALUNO {aluno['Nome']} PORTADOR DO ID {aluno['ID']} REMOVIDO COM SUCESSO"
+                return f"Aluno {aluno['Nome']} portador do ID {aluno['ID']} removido com sucesso!"
             else:
-                return "OPERAÇÃO CANCELADA"
-    return "ID NÃO ENCONTRADO"
+                return "Operação cancelada!"
+    return "ID não cadastrado"
 
 def buscar():
-    busca = input("QUAL ALUNO DESEJA PROCURAR: ").strip().upper()
+    busca = input("Qual é o nome do aluno(a): ").strip().upper()
     if (busca == "") or (not(busca.replace(" ","").isalpha())):
-        return("O NOME DIGITADO NÃO É VALIDO, POR FAVOR DIGITE SOMENTE LETRAS")
+        return("O nome digitado não é válido, por favor digite apenas letras!")
     for aluno in lista_alunos:
         if aluno['Nome'] == busca:
             id_aluno = aluno.get('ID', "-")
@@ -149,65 +149,65 @@ def buscar():
                 f"{nome:<30} | "
                 f"{ano:<10} | "
                 f"{nota:<6.1f}")
-            atualizar = input("DESEJA ATUALIZAR OS DADOS DO ALUNO(A) S/N: ").strip().upper()
+            atualizar = input(f"Deseja atualizar os dados do aluno(a) {busca}? S/N: ").strip().upper()
             if (atualizar == "S" or atualizar == "SIM"):
                 return(atualizar_aluno(aluno))   
             else:
-                return("OPERAÇÃO CANCELADA")            
+                return("Operação cancelada!")            
     else:
-        return ("ALUNO NÃO CADASTRADO")
+        return (f"Não há aluno(a) {busca} cadastrado!")
 
 def atualizar_aluno(aluno:dict):
     while True:
         valor = tabela_atualizacao()
         match valor:
             case 1:
-                nome = input("DIGITE O NOME/SOBRENOME(A): ").strip().upper()
+                nome = input("Digite o nome/sobrenome do aluno(a): ").strip().upper()
                 if (nome == "") or (not(nome.replace(" ","").isalpha())):
-                    print("O NOME DIGITADO NÃO É VALIDO, POR FAVOR DIGITE SOMENTE LETRAS")
+                    print("O nome digitado não é válido, por favor digite apenas letras!")
                     time.sleep(5)
                     limpartela()
                     continue
                 else:
                     aluno["Nome"] = nome
-                    print("ALTERAÇÕES FEITAS COM SUCESSO!")
-                    cont = input ("DESEJA ALTERAR OURTO DADO DO(A) ALUNO?: [S/N]").strip().upper()
+                    print("Alterações feitas com sucesso!")
+                    cont = input ("Deseja alterar outro dado do(a) aluno(a)?: [S/N]").strip().upper()
                     if (cont == "S") or (cont == "SIM"):
                         limpartela()
                         continue
                     else:
-                        return("OPERAÇÃO CANCELADA!")
+                        return("Operação cancelada!")
                         
             case 2:
                 try:
-                    data_ncs = int(input(f"DIGITE O ANO DE NASCIMENTO DO(A) {aluno['Nome']}: "))
+                    data_ncs = int(input(f"Digite o ano de nascimento do aluno(a) {aluno['Nome']}: "))
                     if not (2000 <= data_ncs <= 2020):
-                        print("ANO FORA DO INTERVALO PERMITIDO! ")
+                        print("Ano fora do intervalo permitido! ")
                         time.sleep(5)
                         continue
                 except ValueError:
-                    print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO VALÍDO!")
+                    print("Erro de digitação, por favor digite um número inteiro válido!")
                     time.sleep(5)
                     continue
                 else:
                     aluno['ano_nascimento'] = data_ncs
-                    print("ALTERAÇÕES FEITAS COM SUCESSO!")
-                    cont = input ("DESEJA ALTERAR OUTRO DADO DO(A) ALUNO?: [S/N]").strip().upper()
+                    print("Alterações feitas com sucesso!")
+                    cont = input ("Deseja alterar outro dado do(a) aluno(a)?: [S/N]").strip().upper()
                     if (cont == "S") or (cont == "SIM"):
                         limpartela()
                         continue
                     else:
-                        return("OPERAÇÃO CANCELADA!")
+                        return("Operação cancelada!")
                         
             case 3:
                 try:
-                    nota = float(input(f"QUAL FOI A NOTA DO(A) {aluno['Nome']}: "))
+                    nota = float(input(f"Qual foi a nota do aluno(a) {aluno['Nome']}: "))
                 except ValueError:
-                    print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO VALÍDO ENTRE 0/10! ")
+                    print("Erro de digitação, por favor digite um número entre [0 e 10]! ")
                     time.sleep(5)
                     continue
                 if (nota > 10 or nota < 0):
-                    print("DIGITE UMA NOTA VALÍDA ENTRE 0/10: ")
+                    print("Digite uma nota entre [0 e 10]: ")
                     time.sleep(5)
                     continue
                 else:
@@ -218,13 +218,13 @@ def atualizar_aluno(aluno:dict):
                         aluno["Status"] = "RECUPERAÇÃO"
                     else:
                         aluno["Status"] = "APROVADO(A)"
-                print("ALTERAÇÕES FEITAS COM SUCESSO!")
-                cont = input ("DESEJA ALTERAR OUTRO DADO DO(A) ALUNO?: [S/N]").strip().upper()
+                print("Alterações feitas com sucesso!")
+                cont = input ("Deseja alterar outro dado do(a) aluno(a)?: [S/N]").strip().upper()
                 if (cont == "S") or (cont == "SIM"):
                     limpartela()
                     continue
                 else:
-                    return("OPERAÇÃO CANCELADA!")
+                    return("Operação cancelada!")
             case 4:
-                return("OPERAÇÃO CANCELADA!")
+                return("Operação cancelada!")
     

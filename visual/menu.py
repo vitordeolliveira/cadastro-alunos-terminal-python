@@ -9,19 +9,19 @@ def tabela():
         print('=' * 50) 
         print("ESCOLA MUNICIPAL".center(30))
         print('=' * 50) 
-        print("\n[1] = ADICIONAR ALUNO's(A)\n[2] = LISTAR TODOS OS ALUNOS\n[3] = BUSCAR ALUNO PELO NOME\n[4] = REMOVER ALUNO PELO ID\n[5] = MOSTRAR RELATORIO DA TURMA\n[6] = SAIR\n")
+        print("\n[1] = Adicionar aluno(a)\n[2] = Listar todos os alunos(as)\n[3] = Buscar aluno pelo nome\n[4] = Remover aluno pelo ID\n[5] = Mostrar relatório da turma\n[6] = Sair\n")
         print("=" * 50)
         try:
             x = int(input('ESCOLHA: '))
             if (x <= 0) or (x > 6):
                 limpartela()
-                print("O NÚMERO DIGITADO NÃO ESTÁ ENTRE [1/6], TENTE NOVAMENTE! ")
+                print("O número digitado não está entre [1 e 6], TENTE NOVAMENTE! ")
                 time.sleep(5)
                 continue
             else:
                 return x
         except ValueError:
-            print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO! ")
+            print("Erro de digitação, por favor digite um número inteiro válido! ")
             time.sleep(5)
             continue
 
@@ -30,22 +30,22 @@ def tabela_relatorio():
     while True:
             limpartela()
             print ("""
-                [1] MOSTRA MEDIA GERAL DA TURMA
-                [2] MOSTRAR MAIOR NOTA DA TURMA
-                [3] MOSTRAR MENOR NOTA DA TURMA
-                [4] VOLTAR""")
+                [1] Exibir média geral da turma
+                [2] Exibir maior nota da turma
+                [3] Exibir menor nota da turma
+                [4] Voltar""")
             try:
                 valor = int(input())
                 if (valor <= 0) or (valor > 4):
                     limpartela()
-                    print("O NÚMERO DIGITADO NÃO ESTÁ ENTRE [1/4], TENTE NOVAMENTE! ")
+                    print("O número digitado não está entre [1 e 4], TENTE NOVAMENTE! ")
                     time.sleep(5)
                     continue
                 else:
                     return valor
             except ValueError:
                 limpartela()
-                print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO! ")
+                print("Erro de digitação, por favor digite um número inteiro válido! ")
                 time.sleep(5)
                 continue
 
@@ -54,21 +54,21 @@ def tabela_atualizacao():
     while True:
         limpartela()
         print ("""
-            [1] ATUALIZAR NOME/SOBRENOME
-            [2] ATUALIZAR ANO DE NASCIMENTO
-            [3] ATUALIAR NOTA DO ALUNO(A)
-            [4] VOLTAR""")
+            [1] Atualizar nome/sobrenome do aluno(a)
+            [2] Atualizar ano de nascimento do aluno(a)
+            [3] Atualizar nota do aluno(a)
+            [4] Voltar""")
         try:
             valor = int(input())
             if (valor <= 0) or (valor > 4):
                 limpartela()
-                print("O NÚMERO DIGITADO NÃO ESTÁ ENTRE [1/4], TENTE NOVAMENTE! ")
+                print("O número digitado não está entre [1 e 4], TENTE NOVAMENTE! ")
                 time.sleep(5)
                 continue
             else:
                 return valor
         except ValueError:
             limpartela()
-            print("ERRO DE DIGITAÇÃO, POR FAVOR DIGITE UM NÚMERO INTEIRO VALÍDO! ")
+            print("Erro de digitação, por favor digite um número inteiro válido! ")
             time.sleep(5)
             continue
