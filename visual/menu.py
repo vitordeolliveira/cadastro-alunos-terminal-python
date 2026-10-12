@@ -9,7 +9,12 @@ def tabela():
         print('=' * 50) 
         print("ESCOLA MUNICIPAL".center(30))
         print('=' * 50) 
-        print("\n[1] = Adicionar aluno(a)\n[2] = Listar todos os alunos(as)\n[3] = Buscar aluno pelo nome\n[4] = Remover aluno pelo ID\n[5] = Mostrar relatório da turma\n[6] = Sair\n")
+        print("""[1] = Adicionar aluno(a)
+[2] = Listar todos os alunos(as)
+[3] = Buscar aluno pelo nome
+[4] = Remover aluno pelo ID
+[5] = Mostrar relatório da turma
+[6] = Sair""")
         print("=" * 50)
         try:
             x = int(input('ESCOLHA: '))
@@ -29,11 +34,14 @@ def tabela():
 def tabela_relatorio():
     while True:
             limpartela()
-            print ("""
-                [1] Exibir média geral da turma
-                [2] Exibir maior nota da turma
-                [3] Exibir menor nota da turma
-                [4] Voltar""")
+            print('=' * 40) 
+            print("RELATÓRIO DA TURMA".center(30))
+            print('=' * 40) 
+            print ("""[1] Exibir média geral da turma
+[2] Exibir maior nota da turma
+[3] Exibir menor nota da turma
+[4] Voltar""")
+            print("=" * 40)
             try:
                 valor = int(input())
                 if (valor <= 0) or (valor > 4):
@@ -53,11 +61,14 @@ def tabela_relatorio():
 def tabela_atualizacao():
     while True:
         limpartela()
-        print ("""
-            [1] Atualizar nome/sobrenome do aluno(a)
-            [2] Atualizar ano de nascimento do aluno(a)
-            [3] Atualizar nota do aluno(a)
-            [4] Voltar""")
+        print('=' * 40) 
+        print("ATUALIZAR ALUNO(A)".center(30))
+        print('=' * 40) 
+        print ("""[1] Atualizar nome/sobrenome do aluno(a)
+[2] Atualizar ano de nascimento do aluno(a)
+[3] Atualizar nota do aluno(a)
+[4] Voltar""")
+        print('=' * 40)
         try:
             valor = int(input())
             if (valor <= 0) or (valor > 4):

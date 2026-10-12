@@ -1,5 +1,5 @@
 from visual.menu import *
-from visual.funcoes import *
+from alunos import *
 import time
 
 while True:
