@@ -45,7 +45,7 @@ def criar_tabela():
     cursor = None
 
     try:
-        conexao = conectar(database=None)
+        conexao = conectar("cadastro")
         cursor = conexao.cursor()
 
         sql = """
@@ -69,18 +69,223 @@ def criar_tabela():
         if conexao is not None and conexao.is_connected():
             conexao.close()
 
-def update():
-    pass
+def delete(id:int, nome:str):
+    conexao = None
+    cursor = None
+        
+    try:
+        conexao = conectar("cadastro")
+        cursor = conexao.cursor()
+        
+        sql = """
+        DELETE FROM alunos
+        WHERE Id = %s;
+        """
+        
+        cursor.execute(sql, (id,))
+        if cursor.rowcount > 0:
+            conexao.commit()
+            print(f"Aluno(a) {nome} deletado com sucesso!")
+        else:
+            conexao.rollback()
+            print(f"Nenhum aluno(a) {nome} encontrado com esse ID.")
+    
+    except mysql.connector.Error as erro:
+        if conexao is not None and conexao.is_connected():
+            conexao.rollback()
+            print(f"Erro ao deletar aluno(a) {nome}: {erro}")
+        
+    finally:
+        if cursor is not None:
+            cursor.close()
+        
+        if conexao is not None and conexao.is_connected():
+            conexao.close()
 
-def delete():
-    pass
+def insert(nome:str, ano:int, nota:float):
+    conexao = None
+    cursor = None
+    
+    try:
+        conexao = conectar("cadastro")
+        cursor = conexao.cursor()
+    
+        sql = """
+        INSERT INTO alunos(nome,ano_nascimento, nota)
+        VALUES (%s, %s, %s);
+        """
+        valores = (nome, ano, nota)
+    
+        cursor.execute(sql, valores)
+        conexao.commit()
+        print(f"Aluno(a) {nome} cadastrado com sucesso!")
 
-def insert():
-    pass
+    except mysql.connector.Error as erro:
+        if conexao is not None and conexao.is_connected():
+            conexao.rollback()
+            print(f"Erro ao cadastrar aluno(a) {nome}: {erro}")
+    
+    finally:
+        if cursor is not None:
+            cursor.close()
+    
+        if conexao is not None and conexao.is_connected():
+            conexao.close()
+    
 
-def select():
-    pass
+def select_all():
+    conexao = None
+    cursor = None
+            
+    try:
+        conexao = conectar("cadastro")
+        cursor = conexao.cursor()
+            
+        sql = """SELECT * FROM alunos;
+        """
+        cursor.execute(sql)
+        resultado = cursor.fetchall()
+        if len(resultado) > 0:
+            for alunos in resultado:
+                print(alunos)
+        else:
+            print("Não Há alunos(a) cadastrados!")
 
-if __name__ == "__main__":
-    criar_banco()
-    criar_tabela()
+    except mysql.connector.Error as erro:
+        print(f"Erro ao buscar alunos: {erro}")
+
+    finally:
+        if cursor is not None:
+            cursor.close()
+                   
+        if conexao is not None and conexao.is_connected():
+            conexao.close()
+
+def update_nome(id:int, nome:str):
+    conexao = None
+    cursor = None
+               
+    try:
+        conexao = conectar("cadastro")
+        cursor = conexao.cursor()
+               
+        sql = """
+        UPDATE alunos SET nome  = %s
+        WHERE id = %s;
+        """
+        valores = nome , id
+        cursor.execute(sql, valores)
+        if cursor.rowcount > 0:
+            conexao.commit()
+            print("Alteração realizada com sucesso!")
+        else:
+            conexao.rollback()
+            print("Nenhum aluno encontrado.")
+
+    except mysql.connector.Error as erro:
+        if conexao is not None and conexao.is_connected():
+            conexao.rollback()
+            print(f"Erro ao atualizar o nome do aluno(a) {nome}: {erro}")
+               
+    finally:
+        if cursor is not None:
+            cursor.close()
+               
+        if conexao is not None and conexao.is_connected():
+            conexao.close()
+
+def update_ano(id: int, nome:str, ano:int):
+    conexao = None
+    cursor = None
+        
+    try:
+        conexao = conectar("cadastro")
+        cursor = conexao.cursor()
+        
+        sql = """
+        UPDATE alunos SET ano_nascimento = %s
+        WHERE id = %s;
+        """
+        valores = ano , id
+        cursor.execute(sql, valores)
+        if cursor.rowcount > 0:
+            conexao.commit()
+            print("Alteração realizada com sucesso!")
+        else:
+            conexao.rollback()
+            print("Nenhum aluno encontrado.")
+
+    except mysql.connector.Error as erro:
+        if conexao is not None and conexao.is_connected():
+            conexao.rollback()
+            print(f"Erro ao atualizar ano de nascimento do aluno(a) {nome}: {erro}")
+        
+    finally:
+        if cursor is not None:
+            cursor.close()
+        
+        if conexao is not None and conexao.is_connected():
+            conexao.close()
+
+def update_nota(id:int, nome:str, nota:float):
+    conexao = None
+    cursor = None
+            
+    try:
+        conexao = conectar("cadastro")
+        cursor = conexao.cursor()
+            
+        sql = """
+        UPDATE alunos SET nota  = %s
+        WHERE id = %s;
+        """
+        valores = nota , id
+        cursor.execute(sql, valores)
+        if cursor.rowcount > 0:
+            conexao.commit()
+            print("Alteração realizada com sucesso!")
+        else:
+            conexao.rollback()
+            print("Nenhum aluno encontrado.")
+
+    except mysql.connector.Error as erro:
+        if conexao is not None and conexao.is_connected():
+            conexao.rollback()
+            print(f"Erro ao atualizar a nota do aluno(a) {nome}: {erro}")
+            
+    finally:
+        if cursor is not None:
+            cursor.close()
+            
+        if conexao is not None and conexao.is_connected():
+            conexao.close()
+
+def select_like(nome:str):
+    conexao = None
+    cursor = None
+            
+    try:
+        conexao = conectar("cadastro")
+        cursor = conexao.cursor()
+            
+        sql = """SELECT * FROM alunos
+        WHERE nome LIKE %s;
+        """
+        valores = (f"%{nome}%",)
+        cursor.execute(sql, valores)
+        resultado = cursor.fetchall()
+        if len(resultado) > 0:
+            for alunos in resultado:
+                print(alunos)
+        else:
+            print("Nenhum aluno encontrado com esse nome.")
+    except mysql.connector.Error as erro:
+        print(f"Erro ao buscar alunos: {erro}")        
+    finally:
+        if cursor is not None:
+            cursor.close()
+                   
+        if conexao is not None and conexao.is_connected():
+            conexao.close()
+
+
