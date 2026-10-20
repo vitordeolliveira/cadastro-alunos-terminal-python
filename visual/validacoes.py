@@ -1,7 +1,10 @@
 import os
+import time
+from datetime import date
+
 def limpartela():
     os.system('cls' if os.name == 'nt' else 'clear')
-import time
+
 
 def tabela():
     while True:
@@ -10,7 +13,7 @@ def tabela():
         print("ESCOLA MUNICIPAL".center(30))
         print('=' * 50) 
         print("""[1] = Adicionar aluno(a)
-[2] = Listar todos os alunos(as)
+[2] = Listar todos os alunos
 [3] = Buscar aluno pelo nome
 [4] = Remover aluno pelo ID
 [5] = Mostrar relatório da turma
@@ -83,3 +86,32 @@ def tabela_atualizacao():
             print("Erro de digitação, por favor digite um número inteiro válido! ")
             time.sleep(5)
             continue
+
+def validar_nome(nome):
+    if (nome == "") or (not(nome.replace(" ","").isalpha())) or (len(nome) < 3):
+        print("O nome digitado não é válido, por favor digite apenas letras!")
+        time.sleep(5)
+        limpartela()
+        return False
+    else:
+        return True
+
+def validar_ano(ano):
+    ano_atual = date.today().year
+    idade = ano_atual - ano
+    if idade > 18 or idade < 3:
+        print ("Aluno(a) com idade superior a 18 ou menor do que 3!")
+        time.sleep(5)
+        limpartela()
+        return False
+    else:
+        return True
+    
+def validar_nota(nota):
+    if (nota > 10 or nota < 0):
+        limpartela()
+        print("A nota digitada não está entre [0 e 10]: ")
+        time.sleep(5)
+        return False
+    else:
+        return True

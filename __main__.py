@@ -1,4 +1,4 @@
-from visual.menu import *
+from visual.validacoes import *
 from alunos import *
 import time
 from database import *
