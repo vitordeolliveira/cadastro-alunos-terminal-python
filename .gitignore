@@ -142,3 +142,9 @@ marimo/_lsp/
 __marimo__/
 
 .vscode/
+
+.venv/
+*.pyc
+
+poetry.lock
+pyproject.toml

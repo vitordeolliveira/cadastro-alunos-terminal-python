@@ -1,7 +1,8 @@
-from visual.validacoes import *
-from alunos import *
 import time
+
+from alunos import *
 from database import *
+from visual.validacoes import *
 
 if __name__ == "__main__":
     while True:
@@ -17,14 +18,14 @@ if __name__ == "__main__":
             case 3:
                 limpartela()
                 print(buscar())
-                time.sleep(5)     
+                time.sleep(5)
             case 4:
                 limpartela()
-                print (excluir_aluno())
+                print(excluir_aluno())
                 time.sleep(5)
             case 5:
                 limpartela()
-                print (relatorio())
+                print(relatorio())
                 time.sleep(5)
             case 6:
                 break
